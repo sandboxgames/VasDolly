@@ -48,7 +48,7 @@ public class ThreadManager {
             core = 2;
         }
         CPU_CORE = core;
-        System.out.println("CPU_CORE = " + CPU_CORE);
+//        System.out.println("CPU_CORE = " + CPU_CORE);
     }
 
     private ThreadManager() {
@@ -86,7 +86,7 @@ public class ThreadManager {
         setChannelNum(channelList.size());
         for (String channel : channelList) {
             String apkChannelName = Util.getChannelApkName(apkName, channel);
-            System.out.println("generateV1Channel , channel = " + channel + " , apkChannelName = " + apkChannelName);
+//            System.out.println("generateV1Channel , channel = " + channel + " , apkChannelName = " + apkChannelName);
             File destFile = new File(outputDir, apkChannelName);
             mExecutorService.execute(new ChanndelRunnable(baseApk, destFile, channel, isFastMode));
         }
@@ -97,9 +97,9 @@ public class ThreadManager {
         }
 
         if (mChannelSuccessNum.get() != mChannelNum) {
-            System.out.println("Fail , need generate channel num : " + mChannelNum + " , but success only num : " + mChannelSuccessNum.get() + " , success apk list : " + mChannelSuccessList);
+//            System.out.println("Fail , need generate channel num : " + mChannelNum + " , but success only num : " + mChannelSuccessNum.get() + " , success apk list : " + mChannelSuccessList);
         } else {
-            System.out.println("Success , total generate channel num : " + mChannelNum + " , APK list : " + mChannelSuccessList);
+            System.out.println("success");
         }
     }
 
@@ -133,11 +133,11 @@ public class ThreadManager {
                 if (mIsFastMode) {
                     mChannelSuccessNum.incrementAndGet();//表示生成渠道包成功
                     mChannelSuccessList.add(mDestFile.getName());
-                    System.out.println("Thread : " + threadName + " , generateV1Channel , " + mDestFile + " fastMode success");
+//                    System.out.println("Thread : " + threadName + " , generateV1Channel , " + mDestFile + " fastMode success");
                 } else {
                     //1. verify channel info
                     if (ChannelReader.verifyChannelByV1(mDestFile, mChannel)) {
-                        System.out.println("Thread : " + threadName + " , generateV1Channel , " + mDestFile + " add channel success");
+//                        System.out.println("Thread : " + threadName + " , generateV1Channel , " + mDestFile + " add channel success");
                     } else {
                         throw new RuntimeException("Thread : " + threadName + " , generateV1Channel , " + mDestFile + " add channel failure");
                     }
@@ -145,13 +145,13 @@ public class ThreadManager {
                     if (VerifyApk.verifyV1Signature(mDestFile)) {
                         mChannelSuccessNum.incrementAndGet();//表示生成渠道包成功
                         mChannelSuccessList.add(mDestFile.getName());
-                        System.out.println("Thread : " + threadName + " , generateV1Channel , after add channel , " + mDestFile + " v1 verify success");
+//                        System.out.println("Thread : " + threadName + " , generateV1Channel , after add channel , " + mDestFile + " v1 verify success");
                     } else {
                         throw new RuntimeException("Thread : " + threadName + " , generateV1Channel , after add channel , " + mDestFile + " v1 verify failure");
                     }
                 }
             } catch (Exception e) {
-                System.out.println("Thread : " + threadName + " , generateV1Channel , error , please check it");
+//                System.out.println("Thread : " + threadName + " , generateV1Channel , error , please check it");
                 e.printStackTrace();
             } finally {
                 mChannelountDownLatch.countDown();

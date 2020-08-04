@@ -74,7 +74,7 @@ public class V2SchemeUtil {
             int id = pairs.getInt();
             idValues.put(id, ApkSignatureSchemeV2Verifier.getByteBuffer(pairs, len - 4));//4 is length of id
             if (id == ApkSignatureSchemeV2Verifier.APK_SIGNATURE_SCHEME_V2_BLOCK_ID) {
-                System.out.println("find V2 signature block Id : " + ApkSignatureSchemeV2Verifier.APK_SIGNATURE_SCHEME_V2_BLOCK_ID);
+//                System.out.println("find V2 signature block Id : " + ApkSignatureSchemeV2Verifier.APK_SIGNATURE_SCHEME_V2_BLOCK_ID);
             }
             pairs.position(nextEntryPos);
         }
@@ -165,7 +165,7 @@ public class V2SchemeUtil {
             //5. check Paramters
             apkSectionInfo.checkParamters();
 
-            System.out.println("baseApk : " + baseApk.getAbsolutePath() + "\nApkSectionInfo = " + apkSectionInfo);
+//            System.out.println("baseApk : " + baseApk.getAbsolutePath() + "\nApkSectionInfo = " + apkSectionInfo);
             return apkSectionInfo;
         }finally {
             if (apk != null){
@@ -239,7 +239,7 @@ public class V2SchemeUtil {
 
         // If there has padding block, it needs to be update.
         final boolean needPadding = idValueMap.containsKey(ApkSignatureSchemeV2Verifier.VERITY_PADDING_BLOCK_ID);
-        System.out.println("generateApkSigningBlock , needPadding = " + needPadding);
+//        System.out.println("generateApkSigningBlock , needPadding = " + needPadding);
         if (needPadding) {
             int paddingBlockSize = 8 + 4 + (idValueMap.get(ApkSignatureSchemeV2Verifier.VERITY_PADDING_BLOCK_ID).remaining());
             // update length of apk signing block
@@ -260,7 +260,7 @@ public class V2SchemeUtil {
                 int bufferSize = padding - 8 - 4;//8 is the size of padding bolck, 4 is the id of padding bolck.
                 final ByteBuffer dummy = ByteBuffer.allocate(bufferSize).order(ByteOrder.LITTLE_ENDIAN);
                 idValueMap.put(ApkSignatureSchemeV2Verifier.VERITY_PADDING_BLOCK_ID, dummy);
-                System.out.println("generateApkSigningBlock , final length = " + length + " padding = " + padding + " bufferSize = " + bufferSize);
+//                System.out.println("generateApkSigningBlock , final length = " + length + " padding = " + padding + " bufferSize = " + bufferSize);
             }
         }
 
@@ -317,7 +317,7 @@ public class V2SchemeUtil {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ApkSignatureSchemeV2Verifier.SignatureNotFoundException e) {
-            System.out.println("APK : " + apk.getAbsolutePath() + " not have apk signature block");
+//            System.out.println("APK : " + apk.getAbsolutePath() + " not have apk signature block");
         }
 
         return false;

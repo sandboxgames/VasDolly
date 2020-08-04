@@ -72,7 +72,7 @@ public class IdValueReader {
         }
 
         ByteBuffer value = getByteBufferValueById(channelFile, id);
-        System.out.println("getByteValueById , id = " + id + " , value = " + value);
+//        System.out.println("getByteValueById , id = " + id + " , value = " + value);
 
         if (value != null) {
             return Arrays.copyOfRange(value.array(), value.arrayOffset() + value.position(), value.arrayOffset() + value.limit());
@@ -94,7 +94,7 @@ public class IdValueReader {
         }
 
         Map<Integer, ByteBuffer> idValueMap = getAllIdValueMap(channelFile);
-        System.out.println("getByteBufferValueById , destApk " + channelFile.getAbsolutePath() + " IdValueMap = " + idValueMap);
+//        System.out.println("getByteBufferValueById , destApk " + channelFile.getAbsolutePath() + " IdValueMap = " + idValueMap);
         if (idValueMap != null) {
             return idValueMap.get(id);
         }
@@ -120,7 +120,7 @@ public class IdValueReader {
             e.printStackTrace();
         } catch (ApkSignatureSchemeV2Verifier.SignatureNotFoundException e) {
             //e.printStackTrace();
-            System.out.println("APK : " + channelFile.getAbsolutePath() + " not have apk signature block");
+//            System.out.println("APK : " + channelFile.getAbsolutePath() + " not have apk signature block");
         }
 
         return null;

@@ -55,7 +55,7 @@ public class V1SchemeUtil {
         byte[] comment = channel.getBytes(ChannelConstants.CONTENT_CHARSET);
         Pair<ByteBuffer, Long> eocdAndOffsetInFile = getEocd(file);
         if (eocdAndOffsetInFile.getFirst().remaining() == ZipUtils.ZIP_EOCD_REC_MIN_SIZE) {
-            System.out.println("file : " + file.getAbsolutePath() + " , has no comment");
+//            System.out.println("file : " + file.getAbsolutePath() + " , has no comment");
             try {
                 raf = new RandomAccessFile(file, "rw");
                 //1.locate comment length field
@@ -74,7 +74,7 @@ public class V1SchemeUtil {
                 }
             }
         } else {
-            System.out.println("file : " + file.getAbsolutePath() + " , has comment");
+//            System.out.println("file : " + file.getAbsolutePath() + " , has comment");
             if (containV1Magic(file)) {
                 try {
                     String existChannel = readChannel(file);
@@ -121,9 +121,9 @@ public class V1SchemeUtil {
         RandomAccessFile raf = null;
         Pair<ByteBuffer, Long> eocdAndOffsetInFile = getEocd(file);
         if (eocdAndOffsetInFile.getFirst().remaining() == ZipUtils.ZIP_EOCD_REC_MIN_SIZE) {
-            System.out.println("file : " + file.getName() + " , has no comment");
+//            System.out.println("file : " + file.getName() + " , has no comment");
         } else {
-            System.out.println("file : " + file.getName() + " , has comment");
+//            System.out.println("file : " + file.getName() + " , has comment");
             int existCommentLength = ZipUtils.getUnsignedInt16(eocdAndOffsetInFile.getFirst(), ZipUtils.ZIP_EOCD_REC_MIN_SIZE - ChannelConstants.SHORT_LENGTH);
             try {
                 raf = new RandomAccessFile(file, "rw");
@@ -133,7 +133,7 @@ public class V1SchemeUtil {
                 writeShort(0, raf);
                 //3. modify the length of apk file
                 raf.setLength(file.length() - existCommentLength);
-                System.out.println("file : " + file.getName() + " , remove comment success");
+//                System.out.println("file : " + file.getName() + " , remove comment success");
             } finally {
                 if (raf != null) {
                     raf.close();

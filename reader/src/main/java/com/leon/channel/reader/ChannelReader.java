@@ -35,7 +35,7 @@ public class ChannelReader {
      * @return
      */
     public static String getChannelByV2(File channelFile) {
-        System.out.println("try to read channel info from apk : " + channelFile.getAbsolutePath());
+//        System.out.println("try to read channel info from apk : " + channelFile.getAbsolutePath());
         return IdValueReader.getStringValueById(channelFile, ChannelConstants.CHANNEL_BLOCK_ID);
     }
 
@@ -50,7 +50,7 @@ public class ChannelReader {
         try {
             return V1SchemeUtil.readChannel(channelFile);
         } catch (Exception e) {
-            System.out.println("APK : " + channelFile.getAbsolutePath() + " not have channel info from Zip Comment");
+//            System.out.println("APK : " + channelFile.getAbsolutePath() + " not have channel info from Zip Comment");
         }
         return null;
     }

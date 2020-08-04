@@ -89,9 +89,9 @@ public class Main {
                             return;
                         }
                         if (command1.equals(cmdSignMode)) { //获取签名方式
-                            System.out.print("\n\nsignature mode:" + Util.getSignMode(file));
+                            System.out.println(Util.getSignMode(file));
                         } else if (command1.equals(cmdChannel)) {//获取渠道信息
-                            System.out.print("\n\nChannel: " + Util.readChannel(file));
+                            System.out.println(Util.readChannel(file));
                         } else {
                             System.out.print("\n\nPlease enter the correct command!");
                         }
@@ -122,7 +122,7 @@ public class Main {
                                     return;
                                 }
                             } else {
-                                if (!outputDir.mkdirs()) {
+                                if (!outputDir.getAbsolutePath().endsWith(".apk") && !outputDir.mkdirs()) {
                                     System.out.print("\n\nThe output path mkdirs directory fail!");
                                     return;
                                 }
@@ -185,15 +185,15 @@ public class Main {
                         String filePath = args[2].trim();
                         File file = new File(filePath);
                         if (!file.exists()) {
-                            System.out.print("\n\nApk file does not exist!");
+//                            System.out.println("\n\nApk file does not exist!");
                             return;
                         } else if (file.isDirectory()) {
-                            System.out.print("\n\nThe file path cannot be a directory!");
+//                            System.out.println("\n\nThe file path cannot be a directory!");
                             return;
                         }
                         if (command1.equals(cmdChannel)) { //删除渠道信息
                             if (Util.removeChannel(file)) {
-                                System.out.print("\n\nremove channel success");
+                                System.out.println("success");
                             }
                         } else {
                             System.out.print("\n\nPlease enter the correct command!");
@@ -206,8 +206,6 @@ public class Main {
                 }
             }
         }
-
-        System.out.println();
     }
 
 }
